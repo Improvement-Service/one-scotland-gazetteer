@@ -25,9 +25,6 @@ class ExplicitTLS(Conf):
         #A FTP subclass which adds TLS support to FTP.
         self.client = FTP_TLS(timeout=10)
 
-        #Set the instance’s debugging level. This controls the amount of debugging output printed.
-        #self.client.set_debuglevel(1)
-
     def connect(self):
 
         # Connect to the given host and port.
@@ -48,11 +45,3 @@ class ExplicitTLS(Conf):
         self.client.af = socket.AF_INET6
 
         return self.client
-
-    def tear_down(self):
-        """
-        Close the FTP connection unilaterally.
-        :return:
-        """
-
-        self.client.close()
