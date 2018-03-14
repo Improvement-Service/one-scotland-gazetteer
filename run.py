@@ -6,7 +6,6 @@
 from datetime import datetime
 import ftp_helpers as fth
 import configuration
-import csv
 
 class DownloadNationalExtract(configuration.Conf):
 
@@ -51,7 +50,7 @@ class DownloadNationalExtract(configuration.Conf):
         #function.
         most_recent_ftp_date = sorted(files_dates, key=lambda x: x[0], reverse=True)[0][0]
 
-        return result
+        return [item[1] for item in files_dates if item[0] == most_recent_ftp_date][0]
 
     def download_the_most_recent_file_using_the_ftp(self, client,file_name):
 
@@ -60,7 +59,7 @@ class DownloadNationalExtract(configuration.Conf):
         retr_command = 'RETR %s' % file_name
 
         #This is where the file will be held.
-        download_file = self.file_processing_folder + '\\' + file_name
+        download_file = file_name
 
         with open(download_file, 'wb') as f:
             client.retrbinary(retr_command, f.write)
@@ -76,8 +75,6 @@ def main():
         filename = df.download_the_most_recent_file_using_the_ftp(client, file_name)
     else:
         filename = None
-
-    print(filename)
 
 if __name__ == "__main__":
     main()
