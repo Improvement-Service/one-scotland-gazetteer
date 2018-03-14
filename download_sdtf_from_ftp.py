@@ -39,29 +39,17 @@ class DownloadNationalExtract(configuration.Conf):
 
         #In a list of lists hold the extract datetime and the file name for each file in the FTP server within the DOWNLOAD
         #folder. Each nested list within the list represents the data for each file. An example of the output for the
-        #file_dates list is: [[datetime.date(2018, 1, 2), '9080_20180102_A_01_242.zip'], [datetime.date(2018, 1, 9), \
-        # '9080_20180109_A_01_242.zip'], [datetime.date(2018, 1, 16), '9080_20180116_A_01_242.zip'], \
-        #[datetime.date(2018, 1, 23),'9080_20180123_A_01_242.zip'],[datetime.date(2018, 1, 30),'9080_20180130_A_01_242.zip'],\
-        #[datetime.date(2018, 2, 6),'9080_20180206_A_01_242.zip'],[datetime.date(2018, 2, 13),'9080_20180213_A_01_242.zip']]
-        #In the list only SDTF extracts are included (i.e. filename must include the substring '242'.
+        #file_dates list is: [[datetime.date(2018, 1, 2), '9080_20180102_A_01_277.zip'], [datetime.date(2018, 1, 9), \
+        # '9080_20180109_A_01_277.zip'], [datetime.date(2018, 1, 16), '9080_20180116_A_01_277.zip'], \
+        #[datetime.date(2018, 1, 23),'9080_20180123_A_01_277.zip'],[datetime.date(2018, 1, 30),'9080_20180130_A_01_277.zip'],\
+        #[datetime.date(2018, 2, 6),'9080_20180206_A_01_277.zip'],[datetime.date(2018, 2, 13),'9080_20180213_A_01_277.zip']]
+        #In the list only SDTF extracts are included (i.e. filename must include the substring '277'.)
         files_dates = [[datetime.strptime(file_name.split('_')[1], '%Y%m%d').date(), file_name]\
                        for file_name in client.nlst() if '277' in file_name]
 
         #Identify the file which is the most recent using the files_dates list and return it as an output from this
         #function.
         most_recent_ftp_date = sorted(files_dates, key=lambda x: x[0], reverse=True)[0][0]
-
-        #Collect the most recent date of data load in the metadata.log file which holds all the dates when data
-        #were loaded in the database.
-        with open(self.metadata_log, 'r', newline='\n', encoding='utf') as f:
-            reader = csv.reader(f)
-            reader.__next__()
-            most_recent_loaded_date = max([datetime.strptime(item[0], '%Y%m%d').date() for item in reader])
-
-        if most_recent_ftp_date > most_recent_loaded_date:
-            result = [item[1] for item in files_dates if item[0] == most_recent_ftp_date][0]
-        else:
-            result = None
 
         return result
 
