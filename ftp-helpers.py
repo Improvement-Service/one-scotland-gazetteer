@@ -1,20 +1,25 @@
 import sys
-
 from ftplib import FTP_TLS
 import socket
+import configuration
 
 
 class Conf(configuration.Conf):
 
     def __init__(self):
 
-        self.host = "213.128.245.37"
-        self.user = "your-user"
-        self.password = "your-pass"
-        self.port = 990
+        configuration.Conf.__init__(self)
 
+        self.host = self.ftp_host
+        self.user = self.ftp_user
+        self.password = self.ftp_pass
+        self.port = self.ftp_port
 
+        
 class ExplicitTLS(Conf):
+    """
+    This class includes methods to allow establishing a secure Explicit FTP secure connection to the One Scotland Gazetteer FTP
+    """
 
     def __init__(self):
 
