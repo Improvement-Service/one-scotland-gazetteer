@@ -9,7 +9,7 @@ def main():
     pre_process = svh.PreProcess()
     post_process = svh.PostProcess()
 
-    content = svh.Content('dimitrios.michelakis', 'Hvdb@552')
+    content = svh.Content('your-user', 'your-pass')
 
     # REST tests & examples #
     web_service_availability = content.test_description_language_availability(conf.rest['wadl'])

@@ -3,8 +3,8 @@ class Ftp:
     def __init__(self):
 
         self.ftp_host = '213.128.245.37'
-        self.ftp_user = 'dimitrios.michelakis'
-        self.ftp_pass = 'ROQD20$b'
+        self.ftp_user = 'your-user'
+        self.ftp_pass = 'your-pass'
         self.ftp_port = 990
 
 
