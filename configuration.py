@@ -1,14 +1,18 @@
 class Ftp:
 
+    ftp_user = 'your-ftp-user'
+    ftp_pass = 'your-ftp-pass'
+
     def __init__(self):
 
         self.ftp_host = '213.128.245.37'
-        self.ftp_user = 'your-user'
-        self.ftp_pass = 'your-pass'
         self.ftp_port = 990
 
 
 class WebServices:
+
+    service_user = 'your-web-service-user'
+    service_pass = 'your-web-service-pass'
 
     def __init__(self):
 
