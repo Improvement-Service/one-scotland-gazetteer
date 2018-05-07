@@ -1,14 +1,13 @@
-import sys
 from ftplib import FTP_TLS
 import socket
 import configuration
 
 
-class Conf(configuration.Conf):
+class Conf(configuration.Ftp):
 
     def __init__(self):
 
-        configuration.Conf.__init__(self)
+        configuration.Ftp.__init__(self)
 
         self.host = self.ftp_host
         self.user = self.ftp_user

@@ -1,19 +1,15 @@
-########################################################################################################################
-###The purpose of this script is to download the most recent file from the OSG FTP using FTPES (i.e. FTP over Explicit#
-###TLS). The output of the script is the filename downloaded.
-########################################################################################################################
-
 from datetime import datetime
 import ftp_helpers as fth
 import configuration
 
-class DownloadNationalExtract(configuration.Conf):
+
+class DownloadNationalExtract(configuration.Ftp):
 
     ftpes = fth.ExplicitTLS()
 
     def __init__(self):
 
-        configuration.Conf.__init__(self)
+        configuration.Ftp.__init__(self)
 
     def establish_secure_authenticated_connection_to_ftp(self):
 
@@ -22,7 +18,7 @@ class DownloadNationalExtract(configuration.Conf):
 
         return self.ftpes.login()
 
-    def identify_most_recent_file_available_in_the_ftp_server(self,client):
+    def identify_most_recent_file_available_in_the_ftp_server(self, client):
         """(ftplib object) -> str
         Returns the 'SDTF' file which will be downloaded in the local machine for further processing.
         >>>identify_most_recent_file_available_in_the_ftp_server(obj)
@@ -52,7 +48,7 @@ class DownloadNationalExtract(configuration.Conf):
 
         return [item[1] for item in files_dates if item[0] == most_recent_ftp_date][0]
 
-    def download_the_most_recent_file_using_the_ftp(self, client,file_name):
+    def download_the_most_recent_file_using_the_ftp(self, client, file_name):
 
         #An FTP RETR command needs to be used to download the identified file.
         #The FTP RETR command is used to retrieve a copy of the file requested.
