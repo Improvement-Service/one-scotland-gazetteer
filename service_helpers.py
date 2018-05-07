@@ -27,14 +27,14 @@ class Content:
         else:
             return False
 
-    def list_available_datasets(self, service):
+    def list_all_datasets(self, url):
 
         data = {"listdatasets": {}}
-        response = requests.post(url=service, data=json.dumps(data), headers=self.headers)
+        response = requests.post(url=url, data=json.dumps(data), headers=self.headers)
 
         return response.content
 
-    def query_available_datasets(self, service, data):
+    def query_dataset(self, service, data):
 
         response = requests.post(url=service, data=json.dumps(data), headers=self.headers)
 
@@ -61,28 +61,29 @@ class PreProcess:
         """
 
         result = {'message': None, 'data': None}
-
-        data = json.loads(content.decode('utf8'))
+        data = json.loads(content.decode('utf-8'))
 
         # OSG services contents are different due to the different schema for each of the services. This is handled
         # below by trying different keys which are expected to be present in the response.
         try:
             # Processing a response from listing available datasets
             data = data['ListDataSetsResponseMessage']
-            if data['Header']['ErrorMessage'] == 'Success':
+            error = data['Header']['ErrorMessage']
+            if error == 'Success':
                 result['message'] = 'success'
                 result['data'] = [dataset for dataset in data['NGListDataSetsResponseData']]
             else:
                 result['message'] = 'failure'
-                result['data'] = None
+                result['data'] = error
         except KeyError:
             data = data['SearchResponseMessage']
-            if data['NGSearchResponseData']['Header']['ErrorMessage'] == 'Success':
+            error = data['NGSearchResponseData']['Header']['ErrorMessage']
+            if error == 'Success':
                 result['message'] = 'success'
                 result['data'] = data['NGSearchResponseData']['Result']['any']
             else:
                 result['message'] = 'failure'
-                result['data'] = None
+                result['data'] = error
 
         return result
 

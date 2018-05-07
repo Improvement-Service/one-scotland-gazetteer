@@ -29,6 +29,3 @@ class WebServices:
                          'search': self.services_host + ''},
                      'post_schemas': ''}
 
-c = WebServices()
-print(c.rest)
-
