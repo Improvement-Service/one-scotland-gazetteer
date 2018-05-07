@@ -1,8 +1,10 @@
 # one-scotland-gazetteer
-Includes code to support the download, process, and loading of One Scotland Gazetteer data in a PostGIS database
+
+Includes python code to support the OSG FTP & Web Services usage.
 
 This code has been tested using Python 3.x
 
-Step (1) Edit the configuration.py and replace "your-user" and "your-pass" with credentials provided by One Scotland Gazetteer custodian
+Step (1) Edit the configuration.py and replace "your-user" and "your-pass" with credentials provided by the
+One Scotland Gazetteer custodian
 
-Step (2) execute run.py using Python 3.x
+Step (2) Go to /tests/ and test the code for downloading the OSG FTP extract & the web services
