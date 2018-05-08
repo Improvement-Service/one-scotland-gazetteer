@@ -8,36 +8,17 @@ class RawContent(configuration.WebServices):
     def __init__(self):
 
         configuration.WebServices.__init__(self)
+
+        # This attribute holds the necessary headers to request data from the REST entry points
         self.headers = self.rest['headers']
 
-    def test_description_language_availability(self, description_language):
-        """(str) -> bool
-        The OSG services can be consumed using two different descriptions languages (i.e. the Web application
-        Description Language - WADL to support REST, and the Web Services Description Language - WSDL to support SOAP.
-        This function checks the availability of the WADL or the WSDL depending the parameter provided by the user.
-        :param wadl: 'https://osg.scot/services/NGSearchServiceRest?_wadl'
-        :return: True
-        """
+        # This attribute will hold the content data as returned from the request. This attribute needs to be initialised
+        # as None for the sake of readability as colleagues expect to find all class attributes in the __init__ method.
+        self.content_data = None
 
-        response = requests.get(description_language)
-
-        if response.status_code is 200:
-            return True
-        else:
-            return False
-
-    def list_all_datasets(self, url):
-
-        data = {"listdatasets": {}}
+    def get_content_from_request(self, url, data):
         response = requests.post(url=url, data=json.dumps(data), headers=self.headers)
-
-        return response.content
-
-    def query_dataset(self, service, data):
-
-        response = requests.post(url=service, data=json.dumps(data), headers=self.headers)
-
-        return response.content
+        self.content_data = response.content
 
 
 class PreProcess(RawContent):
@@ -45,8 +26,12 @@ class PreProcess(RawContent):
     def __init__(self):
         RawContent.__init__(self)
 
-    @staticmethod
-    def response(content):
+        # This attribute will hold the response data as returned from the PreProcessing workflow. This attribute needs
+        # to be initialised as None for the sake of readability as colleagues expect to find all class attributes in the
+        # __init__ method.
+        self.response_data = None
+
+    def response(self, url, data):
         """(binary str) -> list
         The content returned using the web services is parsed and returned as a list of dictionaries for easier
         post-processing. An example is following using the 'list' functionality (i.e. 'sendNGListDataSetsMessage')
@@ -60,7 +45,9 @@ class PreProcess(RawContent):
         """
 
         result = {'message': None, 'data': None}
-        data = json.loads(content.decode('utf-8'))
+
+        self.get_content_from_request(url, data)
+        data = json.loads(self.content_data.decode('utf-8'))
 
         # OSG services contents are different due to the different schema for each of the services. This is handled
         # below by trying different keys which are expected to be present in the response.
@@ -84,16 +71,16 @@ class PreProcess(RawContent):
                 result['message'] = 'failure'
                 result['data'] = error
 
-        return result
+        self.response_data = result
+        return self.response_data
 
 
-class PostProcess:
+class PostProcess(PreProcess):
 
     def __init__(self):
-        pass
+        PreProcess.__init__(self)
 
-    @staticmethod
-    def dataset_names(data):
+    def dataset_names(self, url, data):
         """
         Returns the available dataset names in a list. The data input should be
         :param data: {'message': 'success', 'data': 'data': [{'DataSet': 'EST_STANDARD_SEARCH',
@@ -103,6 +90,7 @@ class PostProcess:
         :return: ['EST_STANDARD_SEARCH',...,'...','...',...]
         """
 
+        data = self.response(url, data)
         return [item['DataSet'] for item in data['data']]
 
 

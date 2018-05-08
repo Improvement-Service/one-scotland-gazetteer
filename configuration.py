@@ -22,18 +22,18 @@ class WebServices:
                         'search': 'sendNGSearchMessage'}
 
         # REST service information - Check documentation for further details for the schema.
-        self.rest = {'wadl': '%s/NGSearchServiceRest?_wadl' % self.host,
+        self.rest = {'schema': '%s/NGSearchServiceRest?_wadl' % self.host,
                      'entry_point': {
-                         'list': {'url': self.host + '/NGSearchServiceRest/NGService/%s' % self.service['list'],
-                                  'schemas': {"listdatasets": {}}},
-                         'search': {'url': self.host + '/NGSearchServiceRest/NGService/%s' % self.service['search'],
-                                    'schemas': {}}},
-                     'headers': {"Content-Type": "application/json", "Accept": "application/json",
-                                 "username": self.usr, "password": self.pwd}}
+                         'list': {'url': self.host + '/NGSearchServiceRest/NGService/%s' % self.service['list']},
+                         'search': {'url': self.host + '/NGSearchServiceRest/NGService/%s' % self.service['search']}},
+                     'headers': {"Content-Type": "application/json",
+                                 "Accept": "application/json",
+                                 "username": self.usr,
+                                 "password": self.pwd}}
 
 
         # SOAP service information
-        self.soap = {'wsdl': '%s/NGSearchService?wsdl' % self.host,
+        self.soap = {'schema': '%s/NGSearchService?wsdl' % self.host,
                      'entry_point': {
                          'list': self.host + '',
                          'search': self.host + ''},

@@ -1,43 +1,125 @@
-from helpers import webservice as svh
+from helpers.webservice import PreProcess, PostProcess
 from configuration import WebServices
-import sys
+
+
+class Tools(WebServices):
+
+    def __init__(self):
+
+        WebServices.__init__(self)
+        self.pre_process = PreProcess()
+        self.post_process = PostProcess()
+
+
+class Rest(Tools):
+
+    def __init__(self):
+        Tools.__init__(self)
+        self.list = self.rest['entry_point']['list']['url']
+        self.search = self.rest['entry_point']['search']['url']
+
+    def all_dataset_names_available_in_osg_to_query(self):
+
+        post_data = {"listdatasets": {}}
+
+        return self.post_process.dataset_names(self.list, post_data)
+
+    def all_data_from_a_dataset_filtering_by_attributes(self, dataset=None, attributes=[]):
+        """ (str, list) -> list
+        Returns the OSG data as a list of dictionaries which is extracted from an OSG dataset for a specific UPRN.
+        :param dataset: 'EST_STANDARD_SEARCH'
+        :param attributes: [{"name": "UPRN", "value": ["35000001"], 'matchtype': 'equal to'}]
+        :return: {'message': 'success', 'data': [{'SEARCH_TOWN': '|ALLOA||ALLOA|', 'POSTCODE': 'FK10 2EA',
+        'EASTING': 287561.0, 'STATUS': 1, 'SEARCH_BUILDING_NAME': '|||', 'SEARCH_STREET_NAME': '||ACADEMY STREET|',
+        'ADDRESS_ONE_LINE': '1 ACADEMY STREET, ALLOA, FK10 2EA.', 'PARENT_UPRN': '',
+        'SEARCH_POSTCODE_NO_SPACE': 'FK102EA', 'NORTHING': 693618.0, 'USRN': '8500253', 'SEARCH_BUILDING_NO': '|1||||',
+        'CUSTODIAN': 9056, 'UPRN': 35000001}]}
+        """
+
+        post_data = {"query": {"dataset": dataset,
+                               "attribute": attributes}}
+
+        return self.pre_process.response(self.search, post_data)
+
+    def all_data_from_a_dataset_filtering_by_attributes_and_sorting_results(self, dataset=None, attributes=[], field=None, order=None):
+
+        post_data = {"query": {"dataset": dataset,
+                               "attribute": attributes,
+                               'sortField': field,
+                               'sortOrder': order}}
+
+        return self.pre_process.response(self.search, post_data)
+
+    def all_data_from_a_dataset_filtering_by_attributes_and_geometry(self, dataset=None, attributes=[], area=[]):
+        """
+        Returns the OSG data as a list of dictionaries which is extracted from the defined OSG dataset as specified in
+        this function and the specified attributes & area too.
+        :param dataset: 'EST_STANDARD_SEARCH'
+        :param attributes: [{"name": "UPRN", "value": ["1"], "matchtype": "between"},
+        {"name": "USRN", "value": ["8500253"], "matchtype": "equal to"}]
+        :param area: [{"value": "Cramond", "matchtype": "in"}]
+        :return:
+        """
+
+        post_data = {"query": {"dataset": dataset,
+                               "attribute": attributes,
+                               "area": area}}
+
+        return self.pre_process.response(self.search, post_data)
+
+    def all_data_from_a_dataset_filtering_by_radius(self, dataset=None, radius={}):
+
+        post_data = {"query": {"dataset": dataset,
+                               "type": "full",
+                               "within": radius}}
+
+        return self.pre_process.response(self.search, post_data)
 
 
 def main():
 
-    conf = WebServices()
-    raw_content = svh.RawContent()
+    rest = Rest()
 
-    # REST tests & examples #
-    # Check if the WADL is available
-    web_service_availability = raw_content.test_description_language_availability(conf.rest['wadl'])
+    # Return a list of all the available datasets
+    datasets = rest.all_dataset_names_available_in_osg_to_query()
+    print(datasets)
 
-    if web_service_availability is True:
+    # Attribute query in dataset 'EST_STANDARD_SEARCH' - using one attribute
+    attributes = [{"name": "UPRN", "value": ["35000001"], 'matchtype': 'equal to'}]
+    b = rest.all_data_from_a_dataset_filtering_by_attributes(dataset=datasets[0],
+                                                             attributes=attributes)
+    print(b)
 
-        pre_process = svh.PreProcess()
-        post_process = svh.PostProcess()
+    # Attribute query in dataset 'FVGIS_STANDARD_SEARCH' - by a range of values
+    attributes = [{"name": "UPRN", "value": ["35000001", "35000010"], "matchtype": "between"}]
+    c = rest.all_data_from_a_dataset_filtering_by_attributes(dataset=datasets[4],
+                                                             attributes=attributes)
+    print(c)
 
-        # First return all datasets which you are available for you to query
-        data = raw_content.list_all_datasets(conf.rest['entry_point']['list']['url'])
-        processed_data = pre_process.response(data)
-        # Check if user has access to ask for the list of datasets
-        if processed_data['message'] == 'failure':
-            print(' %s - Please check your "configuration.py"' % processed_data['data'])
-            sys.exit(1)
-        else:
-            dataset_names = post_process.dataset_names(processed_data)
-            print('This is extracting a subset of the data (i.e. available OSG datasets to query) %s ' % dataset_names)
+    # Attribute query - sort results by field name & ascending or descending order - default is 'asc' order
+    attributes = [{"name": "UPRN", "value": ["35000001", "35000010"], "matchtype": "between"},
+                  {"name": "USRN", "value": ["8500253"], "matchtype": "equal to"}]
+    d = rest.all_data_from_a_dataset_filtering_by_attributes_and_sorting_results(dataset=datasets[0],
+                                                                                 attributes=attributes,
+                                                                                 field='UPRN',
+                                                                                 order='desc')
+    print(d)
 
-            # Once the datasets are returned use them to run a query
-            for dataset_name in dataset_names:
-                post_data = {"query": {"dataset": dataset_name, "type": "full"}}
-                data = raw_content.query_dataset(conf.rest['entry_point']['search']['url'], post_data)
-                processed_data = pre_process.response(data)
-                # Check whether user has access to query this dataset
-                if processed_data['message'] == 'failure':
-                    print(' %s ' % processed_data['data'])
-                else:
-                    print('This is data in a python structure %s ' % processed_data)
+    # Combination of attribute and spatial query - assumes polygon stored in the database
+    attributes = [{"name": "UPRN", "value": ["35000001", "35000010"], "matchtype": "between"},
+                  {"name": "USRN", "value": ["8500253"], "matchtype": "equal to"}]
+    area = [{"value": "Cramond", "matchtype": "in"}]
+    e = rest.all_data_from_a_dataset_filtering_by_attributes_and_geometry(dataset=datasets[6],
+                                                                          attributes=attributes,
+                                                                          area=area)
+    print(e)
+
+    # Spatial query - buffer area controlled by the user - This type of query works only for the dataset
+    # 'STD_ADDRESS_SEARCH'.
+    radius = {"easting": 279717.0, "northing": 692958.0, "distance": 10000.0}
+    f = rest.all_data_from_a_dataset_filtering_by_radius(dataset=datasets[6],
+                                                         radius=radius)
+    print(f)
 
 
 if __name__ == "__main__":
