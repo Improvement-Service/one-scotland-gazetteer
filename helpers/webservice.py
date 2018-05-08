@@ -3,9 +3,10 @@ import json
 import configuration
 
 
-class Content(configuration.WebServices):
+class RawContent(configuration.WebServices):
 
     def __init__(self):
+
         configuration.WebServices.__init__(self)
         self.headers = self.rest['headers']
 
@@ -39,10 +40,10 @@ class Content(configuration.WebServices):
         return response.content
 
 
-class PreProcess:
+class PreProcess(RawContent):
 
     def __init__(self):
-        pass
+        RawContent.__init__(self)
 
     @staticmethod
     def response(content):

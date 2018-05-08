@@ -18,12 +18,15 @@ class WebServices:
 
         self.host = 'https://osg.scot/services'
 
+        self.service = {'list': 'sendNGListDataSetsMessage',
+                        'search': 'sendNGSearchMessage'}
+
         # REST service information - Check documentation for further details for the schema.
         self.rest = {'wadl': '%s/NGSearchServiceRest?_wadl' % self.host,
-                     'services': {
-                         'list': {'url': self.host + '/NGSearchServiceRest/NGService/sendNGListDataSetsMessage',
+                     'entry_point': {
+                         'list': {'url': self.host + '/NGSearchServiceRest/NGService/%s' % self.service['list'],
                                   'schemas': {"listdatasets": {}}},
-                         'search': {'url': self.host + '/NGSearchServiceRest/NGService/sendNGSearchMessage',
+                         'search': {'url': self.host + '/NGSearchServiceRest/NGService/%s' % self.service['search'],
                                     'schemas': {}}},
                      'headers': {"Content-Type": "application/json", "Accept": "application/json",
                                  "username": self.usr, "password": self.pwd}}
@@ -31,7 +34,7 @@ class WebServices:
 
         # SOAP service information
         self.soap = {'wsdl': '%s/NGSearchService?wsdl' % self.host,
-                     'services': {
+                     'entry_point': {
                          'list': self.host + '',
                          'search': self.host + ''},
                      'post_schemas': '',
