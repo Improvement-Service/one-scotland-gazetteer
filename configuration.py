@@ -1,35 +1,39 @@
 class Ftp:
 
-    ftp_user = 'your-ftp-user'
-    ftp_pass = 'your-ftp-pass'
+    usr = 'your-ftp-user'
+    pwd = 'your-ftp-pass'
 
     def __init__(self):
 
-        self.ftp_host = '213.128.245.37'
-        self.ftp_port = 990
+        self.host = '213.128.245.37'
+        self.port = 990
 
 
 class WebServices:
 
-    service_user = 'your-web-service-user'
-    service_pass = 'your-web-service-pass'
+    usr = 'your-web-service-user'
+    pwd = 'your-web-service-pass'
 
     def __init__(self):
 
-        self.services_host = 'https://osg.scot/services'
+        self.host = 'https://osg.scot/services'
 
         # REST service information - Check documentation for further details for the schema.
-        self.rest = {'wadl': '%s/NGSearchServiceRest?_wadl' % self.services_host,
+        self.rest = {'wadl': '%s/NGSearchServiceRest?_wadl' % self.host,
                      'services': {
-                         'list': {'url': self.services_host + '/NGSearchServiceRest/NGService/sendNGListDataSetsMessage',
+                         'list': {'url': self.host + '/NGSearchServiceRest/NGService/sendNGListDataSetsMessage',
                                   'schemas': {"listdatasets": {}}},
-                         'search': {'url': self.services_host + '/NGSearchServiceRest/NGService/sendNGSearchMessage',
-                                    'schemas': {}}}}
+                         'search': {'url': self.host + '/NGSearchServiceRest/NGService/sendNGSearchMessage',
+                                    'schemas': {}}},
+                     'headers': {"Content-Type": "application/json", "Accept": "application/json",
+                                 "username": self.usr, "password": self.pwd}}
+
 
         # SOAP service information
-        self.soap = {'wsdl': '%s/NGSearchService?wsdl' % self.services_host,
+        self.soap = {'wsdl': '%s/NGSearchService?wsdl' % self.host,
                      'services': {
-                         'list': self.services_host + '',
-                         'search': self.services_host + ''},
-                     'post_schemas': ''}
+                         'list': self.host + '',
+                         'search': self.host + ''},
+                     'post_schemas': '',
+                     'headers': {}}
 

@@ -3,24 +3,11 @@ import json
 import configuration
 
 
-class Conf(configuration.WebServices):
+class Content(configuration.WebServices):
 
     def __init__(self):
-
         configuration.WebServices.__init__(self)
-        self.service_user = self.service_user
-        self.service_pass = self.service_pass
-
-
-class Content(Conf):
-
-    def __init__(self):
-
-        Conf.__init__(self)
-        self.headers = {"Content-Type": "application/json",
-                        "Accept": "application/json",
-                        "username": self.service_user,
-                        "password": self.service_pass}
+        self.headers = self.rest['headers']
 
     def test_description_language_availability(self, description_language):
         """(str) -> bool

@@ -6,13 +6,7 @@ import configuration
 class Conf(configuration.Ftp):
 
     def __init__(self):
-
         configuration.Ftp.__init__(self)
-
-        self.host = self.ftp_host
-        self.user = self.ftp_user
-        self.password = self.ftp_pass
-        self.port = self.ftp_port
 
         
 class ExplicitTLS(Conf):
@@ -37,7 +31,7 @@ class ExplicitTLS(Conf):
     def login(self):
 
         # Log in as the given user.
-        self.client.login(user=self.user, passwd=self.password)
+        self.client.login(user=self.usr, passwd=self.pwd)
 
         #Make our connection to the server secure (i.e. encrypted)
         self.client.prot_p()
