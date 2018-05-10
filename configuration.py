@@ -11,8 +11,8 @@ class Ftp:
 
 class WebServices:
 
-    usr = 'dimitrios.michelakis'
-    pwd = 'Hvdb@552'
+    usr = 'your-service-user'
+    pwd = 'your-service-pass'
 
     def __init__(self):
 
