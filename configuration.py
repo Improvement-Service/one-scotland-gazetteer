@@ -11,12 +11,13 @@ class Ftp:
 
 class WebServices:
 
-    usr = 'your-web-service-user'
-    pwd = 'your-web-service-pass'
+    usr = 'dimitrios.michelakis'
+    pwd = 'Hvdb@552'
 
     def __init__(self):
 
         self.host = 'https://osg.scot/services'
+        #self.host = 'https://test.osg.scot/services'
 
         self.service = {'list': 'sendNGListDataSetsMessage',
                         'search': 'sendNGSearchMessage'}
@@ -39,4 +40,7 @@ class WebServices:
                          'search': self.host + ''},
                      'post_schemas': '',
                      'headers': {}}
+
+        # Result dictionary communicated to user
+        self.data_dict = {'message': None, 'data': None}
 

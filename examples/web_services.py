@@ -5,7 +5,6 @@ from configuration import WebServices
 class Tools(WebServices):
 
     def __init__(self):
-
         WebServices.__init__(self)
         self.pre_process = PreProcess()
         self.post_process = PostProcess()
@@ -22,7 +21,8 @@ class Rest(Tools):
 
         post_data = {"listdatasets": {}}
 
-        return self.post_process.dataset_names(self.list, post_data)
+        self.post_process.dataset_names(self.list, post_data)
+        return self.post_process.post_processed
 
     def all_data_from_a_dataset_filtering_by_attributes(self, dataset=None, attributes=[]):
         """ (str, list) -> list
@@ -39,7 +39,8 @@ class Rest(Tools):
         post_data = {"query": {"dataset": dataset,
                                "attribute": attributes}}
 
-        return self.pre_process.response(self.search, post_data)
+        self.pre_process.content(self.search, post_data)
+        return self.pre_process.pre_processed
 
     def all_data_from_a_dataset_filtering_by_attributes_and_sorting_results(self, dataset=None, attributes=[], field=None, order=None):
 
@@ -48,7 +49,8 @@ class Rest(Tools):
                                'sortField': field,
                                'sortOrder': order}}
 
-        return self.pre_process.response(self.search, post_data)
+        self.pre_process.content(self.search, post_data)
+        return self.pre_process.pre_processed
 
     def all_data_from_a_dataset_filtering_by_attributes_and_geometry(self, dataset=None, attributes=[], area=[]):
         """
@@ -65,7 +67,8 @@ class Rest(Tools):
                                "attribute": attributes,
                                "area": area}}
 
-        return self.pre_process.response(self.search, post_data)
+        self.pre_process.content(self.search, post_data)
+        return self.pre_process.pre_processed
 
     def all_data_from_a_dataset_filtering_by_radius(self, dataset=None, radius={}):
 
@@ -73,7 +76,8 @@ class Rest(Tools):
                                "type": "full",
                                "within": radius}}
 
-        return self.pre_process.response(self.search, post_data)
+        self.pre_process.content(self.search, post_data)
+        return self.pre_process.pre_processed
 
 
 def main():
@@ -83,6 +87,7 @@ def main():
     # Return a list of all the available datasets
     datasets = rest.all_dataset_names_available_in_osg_to_query()
     print(datasets)
+    datasets = datasets['data']
 
     # Attribute query in dataset 'EST_STANDARD_SEARCH' - using one attribute
     attributes = [{"name": "UPRN", "value": ["35000001"], 'matchtype': 'equal to'}]
