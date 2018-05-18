@@ -87,19 +87,43 @@ and raise a request. For example, a successfully authenticated user may be autho
 service (```sendNGSearchMessage```) only with the ```EST_STANDARD_SEARCH``` dataset but not  the ```ADDRESS_SEARCH``` 
 dataset.
 
-**Datasets:** There is a list of OSG datasets which can be queried but the list is dynamic in the sense that the OSG
-custodian can create new ones. To get a list of all the available datasets in OSG the following request can be used:
+
+**Datasets:** There is a list of OSG datasets which can be queried. The datasets list is not included in this 
+documentation because they can be easily retrieved using the **list** web service. Also the datasets list can be dynamic 
+since the OSG custodian can easily create new ones if there is value to them. To get a list of all the available 
+datasets in OSG the following request can be used:
 
 REST
 
-Request
+Request body
 ```
 {"listdatasets":{}}
 ```
 
-Response
+Response body
 
-ADD ME
+```{
+    "ListDataSetsResponseMessage":{
+        "Header":{
+            "ResultCount":8,
+            "ReturnCount":8,
+            "ErrorCode":0,
+            "ErrorMessage":"Success"
+            },
+            
+        "NGListDataSetsResponseData":[
+            {"DataSet":"EST_STANDARD_SEARCH","Col":["Address_One_Line","Custodian","Easting","Northing","Parent_UPRN","Postcode","Search_Building_Name","Search_Building_No","Search_Postcode_No_Space","Search_Street_Name","Search_Town","Status","UPRN","USRN"]},
+            {"DataSet":"FVGIS_STANDARD_SEARCH","Col":["Address_One_Line","address_one_line_custom","County_Name","Custodian","Easting","Locality_Name","Northing","paon","PAO_NO","Postcode","Post_Town","p_text","record_type_id","saon","SAO_NO","search_building","search_building_name","search_building_no","search_street_name","search_town","Status","s_text","Street_Descriptor","Town","uprn","usrn","x_coordinate","y_coordinate"]},
+            {"DataSet":"FVGIS_STREET_SEARCH","Col":["Custodian","End_Easting","End_Northing","Local_Authority","Locality","search_street_name","search_street_town","Start_Easting","Start_Northing","Street_Name","street_one_line","Town","usrn"]},
+            {"DataSet":"GLASGOW_ACCESS_SAP","Col":["ADDRESS_ONE_LINE","ADR03","ADR04","FLOOR","LAND1","LOCALITY","ORT01","ORT02","PAO_NO","PSTLZ","P_TEXT","SAO_NO","search_line_one","search_postcode_no_space","STATE","S_TEXT","STREET_DESCRIPTOR","UPRN"]},
+            {"DataSet":"STANDARD_SEARCH","Col":["ADDRESS_ONE_LINE","Custodian","Easting","Northing","Postcode","search_building_name","search_building_no","search_street_name","search_town","Status","UPRN"]},
+            {"DataSet":"STANDARD_SEARCH_OLDP","Col":["address_one_line","Custodian","Easting","Northing","Postcode","search_building_name","search_building_no","search_postcode_no_space","search_street_name","search_town","Status","uprn"]},
+            {"DataSet":"STD_ADDRESS_SEARCH","Col":["ADD_LINE_1","ADD_LINE_2","ADD_LINE_3","address_string","la_code","POST_CODE","start_date","TOWN","UPRN","USRN","x_coord","y_coord"]},
+            {"DataSet":"WLC_SEARCH","Col":["Address_One_Line","address_one_line_custom","County_Name","Custodian","Easting","Locality_Name","Northing","paon","PAO_NO","Postcode","Post_Town","p_text","record_type_id","saon","SAO_NO","search_building","search_building_name","search_building_no","search_street_name","search_town","Status","s_text","Street_Descriptor","Town","uprn","usrn","x_coordinate","y_coordinate"]}
+            ]
+        }
+    }
+```
 
 
 **Query:** Querying the OSG data includes using the **search** web service and fields or/and geometries. The **search**
