@@ -132,9 +132,11 @@ Response body - not authorised
 **Query:** Querying the OSG data includes using the **search** web service and fields or/and geometries. The **search**
 web service can receive the following inputs:
 
-#Appendices
+# Appendices
 
- |Input|Description|Values|
+**Table 1. Input**
+
+ |Attribute|Description|Values|
  |---|---|---|
  | ```dataset```  | The name of the dataset to be queried by the web service ||
  | ```attribute``` | One or more attributes of the dataset which can be used for filtering the results to be returned. The attributes specified must be from the fields in the dataset. A matchtype can be specified (see below for list) with ‘equal to’ being the default.  All comparisons are case-insensitive. For the attribute being specified, a name (of the field) and one or more values must be supplied. Multiple attributes are applied in turn to produce smaller sets of results to be returned (i.e. they are logically branded together). |```equal to (default)``` ```greater than``` ```greater than or equal to``` ```less than``` ```less than or equal to``` ```not equal to``` ```contains``` ```between``` ```in``` ```not in```|
@@ -143,7 +145,18 @@ web service can receive the following inputs:
  | ```sortField``` | This allows the results to be sorted on one of the fields from the dataset.  The value supplied for this must be one of the fields from the dataset. ||
  |```sortOrder```| Applied to the ```sortField``` | ```asc (default)``` ```desc```|
 
-**Error codes**
+**Table 2. Output**
+
+|Attribute|Description|Values|
+|---|---|---|
+|```ResultCount```|The number of data items found which match the query||
+|```ReturnCount```|The number of data items returned by the web service (the minimum of ResultCount and 250)||
+|```ErrorCode```|Zero for success or non-zero for failure (see later)| See "Error codes" table|
+|```ErrorMessage```|A message describing an error which occurred (see later)| See "Error codes" table|
+|```Result```|The data items matching the query.  The actual format will depend on the dataset being queried, but it will consist of a set of elements named the same as the dataset, each element containing an element for each field in the dataset (named the same as that field).||
+
+
+**Table 3. Error codes**
 
 The web service can return four possible error codes which are the following:
 
