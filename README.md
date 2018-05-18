@@ -156,35 +156,33 @@ web service can receive the following inputs:
  |```sortOrder```| Applied to the ```sortField``` |No| ```SortOrderType``` | ```asc``` ```desc``` |
  
  
- **Table 2.** AttributeType
+**Table 2.** AttributeType
+
+|Value|Type|Options|
+|---|---|---|
+| ```matchtype``` | ```string``` |```equal to (default)``` ```greater than``` ```greater than or equal to``` ```less than``` ```less than or equal to``` ```not equal to``` ```contains``` ```between``` ```in``` ```not in```|
+| ```name``` | ```string``` ||
+| ```value```| ```string``` ||
+
+
+**Table 3.** WithinType
+
+|Value|Type|Options|
+|---|---|---|
+|```easting``` | ```unsignedLong``` | ```0 - 500000``` |
+|```northing``` | ```unsignedLong``` | ```500000 - 1300000``` |
+|```distance``` | ```decimal``` ||
+
  
- |Value|Type|Options|
- |---|---|---|
- | ```matchtype``` | ```string``` |```equal to (default)``` ```greater than``` ```greater than or equal to``` ```less than``` ```less than or equal to``` ```not equal to``` ```contains``` ```between``` ```in``` ```not in```|
- | ```name``` | ```string``` ||
- | ```value```| ```string``` ||
- 
- 
- **Table 3.** WithinType
- 
- |Value|Type|Options|
- |```easting``` | ```unsignedLong``` | ```0 - 500000``` |
- |```northing``` | ```unsignedLong``` | ```500000 - 1300000``` |
- |```distance``` | ```decimal``` ||
- 
- **Table 2.** Optional properties for the request data
- 
- |Value|Property|Type|Options|
- |---|---|---|---|
- | ```attribute``` | ```matchtype``` | ```string``` |```equal to (default)``` ```greater than``` ```greater than or equal to``` ```less than``` ```less than or equal to``` ```not equal to``` ```contains``` ```between``` ```in``` ```not in```|
- | ```attribute``` | ```name``` | ```string``` ||
- | ```attribute``` | ```value```| ```string``` ||
- | ```within``` | ```easting``` | ```unsignedLong``` | ```0 - 500000``` |
- | ```within``` | ```northing``` | ```unsignedLong``` | ```500000 - 1300000``` |
- | ```within``` | ```distance``` | ```decimal``` ||
+**Table 4.** SortOrderType
+
+|Value|Type|Options|
+|---|---|---|
+| ```asc``` | ```string```||
+| ```desc``` | ```string```||
  
  
-**Table 3. HTTP response body:** Includes the data which are returned in the server's response body.
+**Table 5. HTTP response body:** Includes the data which are returned in the server's response body.
 
 |Value|Description|Options|
 |---|---|---|
@@ -195,7 +193,7 @@ web service can receive the following inputs:
 |```Result```|The data items matching the query.  The actual format will depend on the dataset being queried, but it will consist of a set of elements named the same as the dataset, each element containing an element for each field in the dataset (named the same as that field).||
 
 
-**Table 4. HTTP response error codes:** Includes all the possible error codes returned by the server in the response body
+**Table 6. HTTP response error codes:** Includes all the possible error codes returned by the server in the response body
 
 The web service can return four possible error codes which are the following:
 
