@@ -1,7 +1,7 @@
 class Ftp:
 
-    usr = 'your-ftp-user'
-    pwd = 'your-ftp-pass'
+    usr = 'your-user'
+    pwd = 'your-pass'
 
     def __init__(self):
 
@@ -11,8 +11,8 @@ class Ftp:
 
 class WebServices:
 
-    usr = 'your-service-user'
-    pwd = 'your-service-pass'
+    usr = 'your-user'
+    pwd = 'your-pass'
 
     def __init__(self):
 
