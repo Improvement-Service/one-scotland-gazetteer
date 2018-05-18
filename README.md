@@ -156,6 +156,21 @@ web service can receive the following inputs:
  |```sortOrder```| Applied to the ```sortField``` |No| ```SortOrderType``` | ```asc``` ```desc``` |
  
  
+ **Table 2.** AttributeType
+ 
+ |Value|Type|Options|
+ |---|---|---|
+ | ```matchtype``` | ```string``` |```equal to (default)``` ```greater than``` ```greater than or equal to``` ```less than``` ```less than or equal to``` ```not equal to``` ```contains``` ```between``` ```in``` ```not in```|
+ | ```name``` | ```string``` ||
+ | ```value```| ```string``` ||
+ 
+ **Table 3.** WithinType
+ 
+ |Value|Type|Options|
+ | ```within``` | ```easting``` | ```unsignedLong``` | ```0 - 500000``` |
+ | ```within``` | ```northing``` | ```unsignedLong``` | ```500000 - 1300000``` |
+ | ```within``` | ```distance``` | ```decimal``` ||
+ 
  **Table 2.** Optional properties for the request data
  
  |Value|Property|Type|Options|
