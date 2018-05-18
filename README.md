@@ -144,7 +144,7 @@ web service can receive the following inputs:
 
 # Appendices
 
-**Table 1. Input**
+**Table 1. HTTP request data:** Includes the data which can be included within the query posted to the web service.
 
  |Attribute|Description|Values|
  |---|---|---|
@@ -155,7 +155,7 @@ web service can receive the following inputs:
  | ```sortField``` | This allows the results to be sorted on one of the fields from the dataset.  The value supplied for this must be one of the fields from the dataset. ||
  |```sortOrder```| Applied to the ```sortField``` | ```asc (default)``` ```desc```|
 
-**Table 2. Output**
+**Table 2. HTTP response body:** Includes the data which are returned in the server's response body.
 
 |Attribute|Description|Values|
 |---|---|---|
@@ -166,7 +166,7 @@ web service can receive the following inputs:
 |```Result```|The data items matching the query.  The actual format will depend on the dataset being queried, but it will consist of a set of elements named the same as the dataset, each element containing an element for each field in the dataset (named the same as that field).||
 
 
-**Table 3. Error codes**
+**Table 3. HTTP response error codes:** Includes all the possible error codes returned by the server in the response body
 
 The web service can return four possible error codes which are the following:
 
