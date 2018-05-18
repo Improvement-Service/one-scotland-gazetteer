@@ -140,5 +140,5 @@ web service can receive the following inputs:
  | ```area``` | This takes the name of a pre-loaded polygon which can be used to restrict results to items with a UPRN in a geographical area defined by that polygon.||
  | ```within``` | If this element is supplied then it must contain three sub-elements, an easting, a northing and a distance.  These elements define an area and only items with a UPRN in that area are returned. ||
  | ```sortField``` | This allows the results to be sorted on one of the fields from the dataset.  The value supplied for this must be one of the fields from the dataset. ||
- |```sortOrder```| Applied to the ```sortField``` | ```asc``` (default), ```desc```|
+ |```sortOrder```| Applied to the ```sortField``` | ```asc``` (default) <br /> ```desc```|
 
