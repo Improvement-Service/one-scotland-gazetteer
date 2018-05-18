@@ -163,6 +163,9 @@ web service can receive the following inputs:
  | ```attribute``` | ```matchtype``` | ```string``` |```equal to (default)``` ```greater than``` ```greater than or equal to``` ```less than``` ```less than or equal to``` ```not equal to``` ```contains``` ```between``` ```in``` ```not in```|
  | ```attribute``` | ```name``` | ```string``` ||
  | ```attribute``` | ```value```| ```string``` ||
+ | ```within``` | ```easting``` | ```unsignedLong``` with restriction minInclusive(0) maxInclusive(500000) ||
+ | ```within``` | ```northing``` | ```unsignedLong``` with restriction minInclusive(500000) maxInclusive(1300000) ||
+ | ```within``` | ```distance``` | ```decimal``` ||
  
  
 **Table 3. HTTP response body:** Includes the data which are returned in the server's response body.
