@@ -1,15 +1,25 @@
 # one-scotland-gazetteer
 
-##### The code in this repository makes the following assumptions:
+#### How to use this repository 
+
+This repository includes two things:
+
+(A) Python 3.x code, examples, and scripts to test the One Scotland Gazetteer (OSG) web services and FTP download.
+
+(B) General documentation for the OSG web services and FTP.
+
+#### Assumptions to use the python code
 
 **(A)** You have installed python 3.x in your operating system (OS)
 
 **(B)** You have registered with the One Scotland Gazetteer (OSG) and can you are authorised to use the OSG web service
 or the OSG FTP. To learn more please visit the [One Scotland Gazetteer](https://osg.scot) website.
 
-##### To use the code, examples, and scripts in this repository please follow the instructions below:
+#### Instructions to use the python code
 
-**(A) Edit the ```configuration.py```:** In the root folder of this repository edit and and replace the values 
+**(A) Edit the ```configuration.py```:** 
+
+In the root folder of this repository edit and and replace the values 
 ```"your-user"``` and ```"your-pass"``` with the credentials provided by the One Scotland Gazetteer custodian. 
 Your username and password credentials may be different depending on FTP or WebServices access.
 
