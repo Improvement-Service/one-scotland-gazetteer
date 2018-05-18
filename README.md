@@ -170,7 +170,7 @@ web service can receive the following inputs:
 
 The web service can return four possible error codes which are the following:
 
-|Code|Explanation|Example(s)|
+|Code|Explanation|Message(s)|
 |---|---|---|
 |```0```| Successful submission to the web service||
 |```1```| Error with the data posted to the web service| ```Invalid Value - Schema validation error : <error msg>```|
