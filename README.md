@@ -1,13 +1,13 @@
 # one-scotland-gazetteer
 
-#####The code in this repository makes the following assumptions:
+##### The code in this repository makes the following assumptions:
 
 **(A)** You have installed python 3.x in your operating system (OS)
 
 **(B)** You have registered with the One Scotland Gazetteer (OSG) and can you are authorised to use the OSG web service
 or the OSG FTP. To learn more please visit the [One Scotland Gazetteer](https://osg.scot) website.
 
-#####To use the code, examples, and scripts in this repository please follow the instructions below:
+##### To use the code, examples, and scripts in this repository please follow the instructions below:
 
 **(A) Edit the ```configuration.py```:** In the root folder of this repository edit and and replace the values 
 ```"your-user"``` and ```"your-pass"``` with the credentials provided by the One Scotland Gazetteer custodian. 
@@ -38,7 +38,7 @@ requirements.
 For additional information please visit the [One Scotland Gazetteer](https://osg.scot) website.
 
 
-###Web services 
+### Web services 
 The OSG web services are structured around **datasets**, which contain **fields** which in turn contain the actual 
 **data**. Each web service dataset returns different fields & data and may also support different functionality. The 
 OSG has two web services ```sendNGListDataSetsMessage``` (henceforth **list**) which returns the datasets available for 
