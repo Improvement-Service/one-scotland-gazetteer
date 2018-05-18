@@ -85,8 +85,11 @@ that you have access to all available OSG datasets. Access to datasets is admini
 access is needed for additional datasets the users need to visit the [One Scotland Gazetteer](https://osg.scot) website 
 and raise a request. For example, an authorised user may have access to use the **search** web service 
 (```sendNGSearchMessage```) to return the OSG data held in the fields of the ```EST_STANDARD_SEARCH``` dataset but not 
-have access to ```ADDRESS_SEARCH```. The following REST example demonstrates an example of the request and response if
-a user has access to the ```EST_STANDARD_SEARCH``` dataset and no access to the ```FVGIS_STANDARD_SEARCH``` dataset
+have access to ```ADDRESS_SEARCH```.
+
+**REST Examples**
+
+(1) Return OSG records from the ```EST_STANDARD_SEARCH``` dataset.
 
 Request data
 
@@ -118,33 +121,16 @@ Response body - authorised
 }
 ```
 
-Response body - not authorised
-
-```
-{
-    "SearchResponseMessage":{
-        "NGSearchResponseData":{
-            "Header":{
-                "ResultCount":0,
-                "ReturnCount":0,
-                "ErrorCode":3,
-                "ErrorMessage":"You do not have permissions to use this service."
-            },
-            "Result":{
-                   "any": 
-                        null
-                        }
-        }
-    }
-}
-```
-
 **Query:** Querying the OSG data includes using the **search** web service and fields or/and geometries. The **search**
 web service can receive the following inputs:
 
 # Appendices
 
-**Table 1.** HTTP request data which can be included within the query posted to the web service.
+**Table 1.** OSG webservices datasets
+
+
+
+**Table 2.** HTTP request data which can be included within the query posted to the web service.
 
  |Value|Description|Mandatory|Type|
  |---|---|---|---|
@@ -156,7 +142,7 @@ web service can receive the following inputs:
  |```sortOrder```| Applied to the ```sortField``` |No| ```SortOrderType``` |
  
  
-**Table 2.** Definition of the ```AttributeType```
+**Table 3.** Definition of the ```AttributeType```
 
 |Value|Type|Options|
 |---|---|---|
@@ -165,7 +151,7 @@ web service can receive the following inputs:
 | ```value```| ```string``` ||
 
 
-**Table 3.** Definition of the ```WithinType```
+**Table 4.** Definition of the ```WithinType```
 
 |Value|Type|Options|
 |---|---|---|
@@ -174,7 +160,7 @@ web service can receive the following inputs:
 |```distance``` | ```decimal``` ||
 
  
-**Table 4.** Definition of the ```SortOrderType```
+**Table 5.** Definition of the ```SortOrderType```
 
 |Value|Type|Options|
 |---|---|---|
@@ -182,7 +168,7 @@ web service can receive the following inputs:
 | ```desc``` | ```string```||
  
  
-**Table 5. HTTP response body:** Includes the data which are returned in the server's response body.
+**Table 6. HTTP response body:** Includes the data which are returned in the server's response body.
 
 |Value|Description|Options|
 |---|---|---|
@@ -193,7 +179,7 @@ web service can receive the following inputs:
 |```Result```|The data items matching the query.  The actual format will depend on the dataset being queried, but it will consist of a set of elements named the same as the dataset, each element containing an element for each field in the dataset (named the same as that field).||
 
 
-**Table 6. HTTP response error codes:** Includes all the possible error codes returned by the server in the response body
+**Table 7. HTTP response error codes:** Includes all the possible error codes returned by the server in the response body
 
 The web service can return four possible error codes which are the following:
 
