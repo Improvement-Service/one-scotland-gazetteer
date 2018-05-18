@@ -148,10 +148,10 @@ web service can receive the following inputs:
 
  |Attribute|Description|Values|Mandatory|
  |---|---|---|---|
- | ```dataset```  | The name of the dataset to be queried by the web service |Yes|
+ | ```dataset```  | The name of the dataset to be queried by the web service ||Yes|
  | ```attribute``` | One or more attributes of the dataset which can be used for filtering the results to be returned. The attributes specified must be from the fields in the dataset. A matchtype can be specified (see below for list) with ‘equal to’ being the default.  All comparisons are case-insensitive. For the attribute being specified, a name (of the field) and one or more values must be supplied. Multiple attributes are applied in turn to produce smaller sets of results to be returned (i.e. they are logically branded together). |```equal to (default)``` ```greater than``` ```greater than or equal to``` ```less than``` ```less than or equal to``` ```not equal to``` ```contains``` ```between``` ```in``` ```not in```|No|
- | ```area``` | This takes the name of a pre-loaded polygon which can be used to restrict results to items with a UPRN in a geographical area defined by that polygon.|No|
- | ```within``` | If this element is supplied then it must contain three sub-elements, an easting, a northing and a distance.  These elements define an area and only items with a UPRN in that area are returned. |No|
+ | ```area``` | This takes the name of a pre-loaded polygon which can be used to restrict results to items with a UPRN in a geographical area defined by that polygon.||No|
+ | ```within``` | If this element is supplied then it must contain three sub-elements, an easting, a northing and a distance.  These elements define an area and only items with a UPRN in that area are returned. ||No|
  | ```sortField``` | This allows the results to be sorted on one of the fields from the dataset.  The value supplied for this must be one of the fields from the dataset. |No|
  |```sortOrder```| Applied to the ```sortField``` | ```asc (default)``` ```desc```|No|
 
