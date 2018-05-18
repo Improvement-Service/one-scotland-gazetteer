@@ -88,12 +88,11 @@ service (```sendNGSearchMessage```) only with the ```EST_STANDARD_SEARCH``` data
 dataset.
 
 
-**Datasets:** There is a list of OSG datasets which can be queried. The datasets list is not included in this 
-documentation because they can be easily retrieved using the **list** web service. Also the datasets list can be dynamic 
+**Datasets:** The **list** web service can return all available OSG datasets. The OSG datasets list can be dynamic 
 since the OSG custodian can easily create new ones if there is value to them. To get a list of all the available 
-datasets in OSG the following request can be used:
+**datasets** including the **fields** for each dataset which can be queried the following request can be used:
 
-REST
+**REST**
 
 Request body
 ```
