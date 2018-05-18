@@ -146,7 +146,7 @@ web service can receive the following inputs:
 
 **Table 1.** HTTP request data which can be included within the query posted to the web service.
 
- |Data|Description|Values|Mandatory|Type|
+ |Value|Description|Options|Mandatory|Type|
  |---|---|---|---|---|
  | ```dataset```  | The name of the dataset to be queried by the web service ||Yes|```string```|
  | ```attribute``` | One or more attributes of the dataset which can be used for filtering the results to be returned. The attributes specified must be from the fields in the dataset. A matchtype can also be specified. All comparisons are case-insensitive. For the attribute being specified, a name (of the field) and one or more values must be supplied. Multiple attributes are applied in turn to produce smaller sets of results to be returned (i.e. they are logically branded together). ||No| ```AttributeType```|
@@ -158,7 +158,7 @@ web service can receive the following inputs:
  
  **Table 2.** Optional properties for the request data
  
- |Data|Property|Type|Values|
+ |Value|Property|Type|Options|
  |---|---|---|---|
  | ```attribute``` | ```matchtype``` | ```string``` |```equal to (default)``` ```greater than``` ```greater than or equal to``` ```less than``` ```less than or equal to``` ```not equal to``` ```contains``` ```between``` ```in``` ```not in```|
  | ```attribute``` | ```name``` | ```string``` ||
@@ -170,7 +170,7 @@ web service can receive the following inputs:
  
 **Table 3. HTTP response body:** Includes the data which are returned in the server's response body.
 
-|Attribute|Description|Values|
+|Value|Description|Options|
 |---|---|---|
 |```ResultCount```|The number of data items found which match the query||
 |```ReturnCount```|The number of data items returned by the web service (the minimum of ResultCount and 250)||
