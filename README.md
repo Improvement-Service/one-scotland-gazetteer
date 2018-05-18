@@ -164,12 +164,13 @@ web service can receive the following inputs:
  | ```name``` | ```string``` ||
  | ```value```| ```string``` ||
  
+ 
  **Table 3.** WithinType
  
  |Value|Type|Options|
- | ```within``` | ```easting``` | ```unsignedLong``` | ```0 - 500000``` |
- | ```within``` | ```northing``` | ```unsignedLong``` | ```500000 - 1300000``` |
- | ```within``` | ```distance``` | ```decimal``` ||
+ |```easting``` | ```unsignedLong``` | ```0 - 500000``` |
+ |```northing``` | ```unsignedLong``` | ```500000 - 1300000``` |
+ |```distance``` | ```decimal``` ||
  
  **Table 2.** Optional properties for the request data
  
