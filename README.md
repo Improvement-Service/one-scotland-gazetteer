@@ -156,7 +156,7 @@ web service can receive the following inputs:
  |```sortOrder```| Applied to the ```sortField``` |No| ```SortOrderType``` |
  
  
-**Table 2.** AttributeType
+**Table 2.** Definition of the ```AttributeType```
 
 |Value|Type|Options|
 |---|---|---|
@@ -165,7 +165,7 @@ web service can receive the following inputs:
 | ```value```| ```string``` ||
 
 
-**Table 3.** WithinType
+**Table 3.** Definition of the ```WithinType```
 
 |Value|Type|Options|
 |---|---|---|
@@ -174,7 +174,7 @@ web service can receive the following inputs:
 |```distance``` | ```decimal``` ||
 
  
-**Table 4.** SortOrderType
+**Table 4.** Definition of the ```SortOrderType```
 
 |Value|Type|Options|
 |---|---|---|
