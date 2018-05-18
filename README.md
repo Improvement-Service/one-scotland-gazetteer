@@ -146,14 +146,14 @@ web service can receive the following inputs:
 
 **Table 1.** HTTP request data which can be included within the query posted to the web service.
 
- |Value|Description|Mandatory|Type|
+ |Value|Description|Mandatory|Type|Type options|
  |---|---|---|---|
- | ```dataset```  | The name of the dataset to be queried by the web service |Yes|```string```|
- | ```attribute``` | One or more attributes of the dataset which can be used for filtering the results to be returned. The attributes specified must be from the fields in the dataset. A matchtype can also be specified. All comparisons are case-insensitive. For the attribute being specified, a name (of the field) and one or more values must be supplied. Multiple attributes are applied in turn to produce smaller sets of results to be returned (i.e. they are logically branded together). |No| ```AttributeType```|
- | ```area``` | This takes the name of a pre-loaded polygon which can be used to restrict results to items with a UPRN in a geographical area defined by that polygon.|No| ```string``` |
- | ```within``` | If this element is supplied then it must contain three sub-elements, an easting, a northing and a distance.  These elements define an area and only items with a UPRN in that area are returned.|No| ```WithinType```
- | ```sortField``` | This allows the results to be sorted on one of the fields from the dataset.  The value supplied for this must be one of the fields from the dataset.|No| ```string``` |
- |```sortOrder```| Applied to the ```sortField``` |No| ```SortOrderType```
+ | ```dataset```  | The name of the dataset to be queried by the web service |Yes|```string```||
+ | ```attribute``` | One or more attributes of the dataset which can be used for filtering the results to be returned. The attributes specified must be from the fields in the dataset. A matchtype can also be specified. All comparisons are case-insensitive. For the attribute being specified, a name (of the field) and one or more values must be supplied. Multiple attributes are applied in turn to produce smaller sets of results to be returned (i.e. they are logically branded together). |No| ```AttributeType```| ```matchtype``` ```name``` ```value``` |
+ | ```area``` | This takes the name of a pre-loaded polygon which can be used to restrict results to items with a UPRN in a geographical area defined by that polygon.|No| ```string``` ||
+ | ```within``` | If this element is supplied then it must contain three sub-elements, an easting, a northing and a distance.  These elements define an area and only items with a UPRN in that area are returned.|No| ```WithinType``` | ```easting``` ```northing``` ```distance``` |
+ | ```sortField``` | This allows the results to be sorted on one of the fields from the dataset.  The value supplied for this must be one of the fields from the dataset.|No| ```string``` ||
+ |```sortOrder```| Applied to the ```sortField``` |No| ```SortOrderType``` | ```asc``` ```desc``` |
  
  
  **Table 2.** Optional properties for the request data
