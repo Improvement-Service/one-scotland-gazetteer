@@ -132,6 +132,7 @@ Response body - not authorised
 **Query:** Querying the OSG data includes using the **search** web service and fields or/and geometries. The **search**
 web service can receive the following inputs:
 
+#Appendices
 
  |Input|Description|Values|
  |---|---|---|
@@ -140,5 +141,15 @@ web service can receive the following inputs:
  | ```area``` | This takes the name of a pre-loaded polygon which can be used to restrict results to items with a UPRN in a geographical area defined by that polygon.||
  | ```within``` | If this element is supplied then it must contain three sub-elements, an easting, a northing and a distance.  These elements define an area and only items with a UPRN in that area are returned. ||
  | ```sortField``` | This allows the results to be sorted on one of the fields from the dataset.  The value supplied for this must be one of the fields from the dataset. ||
- |```sortOrder```| Applied to the ```sortField``` | ```asc``` (default) <br /> ```desc```|
+ |```sortOrder```| Applied to the ```sortField``` | ```asc (default)``` ```desc```|
 
+**Error codes**
+
+The web service can return four possible error codes which are the following:
+
+|Code|Explanation|Example(s)|
+|---|---|---|
+|```0```| Successful submission to the web service||
+|```1```| Error with the data posted to the web service| ```Invalid Value - Schema validation error : <error msg>```|
+|```2```| Issue was encountered during request processing (for example requesting a dataset which does not exist)| ```Invalid dataset [<dataset>]``` ```Invalid attribute name for dataset <dataset> [<attr_name>]``` ```<attr_name>: Invalid Date [<value>] expected format YYYY-MM-DD``` ```<attr_name>: Invalid Number [<value>]``` ```Invalid area [<area>]``` ```The dataset <dataset> does not support filtering on area``` ```polygon (<area>) awaiting initial index build - please try again later``` ```Invalid sort_field for dataset <dataset> [<sort_field>]```|
+|```3```| Authentication/authorisation error||
