@@ -83,15 +83,33 @@ password:secret
 **Authorisation:** Authenticating with the OSG web service using your ```username``` and ```password``` does not mean 
 that you have access to all available OSG datasets. Access to datasets is administrated by the OSG custodian and if 
 access is needed for additional datasets the users need to visit the [One Scotland Gazetteer](https://osg.scot) website 
-and raise a request. For example, an authorised user may have access to use the **search** web service 
-(```sendNGSearchMessage```) to return the OSG data held in the fields of the ```EST_STANDARD_SEARCH``` dataset but not 
-have access to ```ADDRESS_SEARCH```.
+and raise a request. For example, a successfully authenticated user may be authorised to access the **search** web 
+service (```sendNGSearchMessage```) only with the ```EST_STANDARD_SEARCH``` dataset but not  the ```ADDRESS_SEARCH``` 
+dataset.
+
+**Datasets:** There is a list of OSG datasets which can be queried but the list is dynamic in the sense that the OSG
+custodian can create new ones. To get a list of all the available datasets in OSG the following request can be used:
+
+REST
+
+Request
+```
+{"listdatasets":{}}
+```
+
+Response
+
+ADD ME
+
+
+**Query:** Querying the OSG data includes using the **search** web service and fields or/and geometries. The **search**
+web service can receive the following inputs:
 
 **REST Examples**
 
 (1) Return OSG records from the ```EST_STANDARD_SEARCH``` dataset.
 
-Request data
+Request body
 
 ```
 {"query":{
@@ -100,7 +118,7 @@ Request data
 }}
 
 ```
-Response body - authorised
+Response body
 ```
 {
     "SearchResponseMessage": {
@@ -120,9 +138,6 @@ Response body - authorised
     }
 }
 ```
-
-**Query:** Querying the OSG data includes using the **search** web service and fields or/and geometries. The **search**
-web service can receive the following inputs:
 
 # Appendices
 
