@@ -47,7 +47,6 @@ requirements.
 
 For additional information please visit the [One Scotland Gazetteer](https://osg.scot) website.
 
-
 ### Web services 
 The OSG web services are structured around **datasets**, which contain **fields** which in turn contain the actual 
 **data**. Each web service dataset returns different fields & data and may also support different functionality. The 
@@ -164,11 +163,7 @@ Response body
 
 # Appendices
 
-**Table 1.** OSG webservices datasets
-
-
-
-**Table 2.** HTTP request data which can be included within the query posted to the web service.
+**Table 1.** HTTP request data which can be included within the query posted to the web service.
 
  |Value|Description|Mandatory|Type|
  |---|---|---|---|
@@ -180,7 +175,7 @@ Response body
  |```sortOrder```| Applied to the ```sortField``` |No| ```SortOrderType``` |
  
  
-**Table 3.** Definition of the ```AttributeType```
+**Table 2.** Definition of the ```AttributeType```
 
 |Value|Type|Options|
 |---|---|---|
@@ -189,7 +184,7 @@ Response body
 | ```value```| ```string``` ||
 
 
-**Table 4.** Definition of the ```WithinType```
+**Table 3.** Definition of the ```WithinType```
 
 |Value|Type|Options|
 |---|---|---|
@@ -198,7 +193,7 @@ Response body
 |```distance``` | ```decimal``` ||
 
  
-**Table 5.** Definition of the ```SortOrderType```
+**Table 4.** Definition of the ```SortOrderType```
 
 |Value|Type|Options|
 |---|---|---|
@@ -206,7 +201,7 @@ Response body
 | ```desc``` | ```string```||
  
  
-**Table 6. HTTP response body:** Includes the data which are returned in the server's response body.
+**Table 5. HTTP response body:** Includes the data which are returned in the server's response body.
 
 |Value|Description|Options|
 |---|---|---|
@@ -217,7 +212,7 @@ Response body
 |```Result```|The data items matching the query.  The actual format will depend on the dataset being queried, but it will consist of a set of elements named the same as the dataset, each element containing an element for each field in the dataset (named the same as that field).||
 
 
-**Table 7. HTTP response error codes:** Includes all the possible error codes returned by the server in the response body
+**Table 6. HTTP response error codes:** Includes all the possible error codes returned by the server in the response body
 
 The web service can return four possible error codes which are the following:
 
