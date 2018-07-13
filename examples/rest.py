@@ -1,11 +1,14 @@
-from helpers.webservice import PreProcess, PostProcess
-from configuration import WebServices
+import sys
+sys.path.insert(0, '../')
+
+from osg.base import Configuration
+from osg.service import PreProcess, PostProcess
 
 
-class Tools(WebServices):
+class Tools(Configuration):
 
     def __init__(self):
-        WebServices.__init__(self)
+        Configuration.__init__(self)
         self.pre_process = PreProcess()
         self.post_process = PostProcess()
 
@@ -14,8 +17,8 @@ class Rest(Tools):
 
     def __init__(self):
         Tools.__init__(self)
-        self.list = self.rest['entry_point']['list']['url']
-        self.search = self.rest['entry_point']['search']['url']
+        self.list = self.get_configuration_for('rest', 'list')
+        self.search = self.get_configuration_for('rest', 'search')
 
     def all_dataset_names_available_in_osg_to_query(self):
 

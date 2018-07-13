@@ -1,18 +1,23 @@
+from osg.base import Configuration
 import requests
 import json
-import configuration
 from requests.exceptions import SSLError
 import sys
+import ast
 
 
-class Response(configuration.WebServices):
+class Response(Configuration):
+
+    data_dict = {'message': None, 'data': None}
 
     def __init__(self):
 
-        configuration.WebServices.__init__(self)
+        Configuration.__init__(self)
 
         # This attribute holds the necessary headers to request data from the REST entry points
-        self.headers = self.rest['headers']
+        self.headers = ast.literal_eval(self.get_configuration_for('rest', 'headers'))
+        self.headers['username'] = self.get_configuration_for('service', 'username')
+        self.headers['password'] = self.get_configuration_for('service', 'password')
 
         # This attribute will hold the response data as returned from the Response workflow. This attribute needs to be
         # initialised as below for the sake of readability since colleagues expect to find all class attributes in

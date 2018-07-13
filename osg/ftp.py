@@ -1,37 +1,30 @@
+from osg.base import Configuration
 from ftplib import FTP_TLS
 import socket
-import configuration
-
-
-class Conf(configuration.Ftp):
-
-    def __init__(self):
-        configuration.Ftp.__init__(self)
 
         
-class ExplicitTLS(Conf):
+class ExplicitTLS(Configuration):
     """
     This class includes methods to allow establishing a secure Explicit FTP secure connection to the One Scotland Gazetteer FTP
     """
 
     def __init__(self):
-
-        Conf.__init__(self)
+        Configuration.__init__(self)
+        self.host = self.get_configuration_for('ftp', 'host')
+        self.port = int(self.get_configuration_for('ftp', 'port'))
+        self.username = self.get_configuration_for('ftp', 'username')
+        self.password = self.get_configuration_for('ftp', 'password')
 
     def setup(self):
-
-        #A FTP subclass which adds TLS support to FTP.
+        # An FTP subclass which adds TLS support to FTP
         self.client = FTP_TLS(timeout=10)
 
     def connect(self):
 
-        # Connect to the given host and port.
         self.client.connect(host=self.host, port=self.port)
 
     def login(self):
-
-        # Log in as the given user.
-        self.client.login(user=self.usr, passwd=self.pwd)
+        self.client.login(user=self.username, passwd=self.password)
 
         #Make our connection to the server secure (i.e. encrypted)
         self.client.prot_p()
@@ -43,3 +36,4 @@ class ExplicitTLS(Conf):
         self.client.af = socket.AF_INET6
 
         return self.client
+
