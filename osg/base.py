@@ -4,7 +4,7 @@ from pathlib import Path
 
 class Configuration:
 
-    file_name = 'production.ini'
+    file_name = 'development.ini'
 
     def __init__(self):
         self.file_path = [x for x in Path('../').iterdir() if x.name == self.file_name][0]
