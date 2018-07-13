@@ -7,7 +7,9 @@ class Configuration:
     file_name = 'development.ini'
 
     def __init__(self):
-        self.file_path = [x for x in Path('../').iterdir() if x.name == self.file_name][0]
+        # The file path targeting the configuration file. The file path is converted to string so it can be used in
+        # different Python 3.x versions.
+        self.file_path = [str(path) for path in Path('../').iterdir() if path.name == self.file_name][0]
 
     def get_configuration_for(self, section, option):
 
