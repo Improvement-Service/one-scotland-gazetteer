@@ -17,19 +17,19 @@ or the OSG FTP. To learn more please visit the [One Scotland Gazetteer](https://
 
 #### Instructions to use the python code
 
-**(A) Edit the ```configuration.py```:** 
+**(A) Edit the ```development.ini```:**
 
-In the root folder of this repository edit and and replace the values 
-```"your-user"``` and ```"your-pass"``` with the credentials provided by the One Scotland Gazetteer custodian. 
-Your username and password credentials may be different depending on FTP or WebServices access.
+In the root folder of this repository edit the development.ini file and add your username and password for the OSG FTP and
+the OSG web services. These credentials are provided by the One Scotland Gazetteer Custodian and you may have different for
+the FTP and the Web services.
 
 **(B)** Use the web services examples: 
 
-```python /examples/web_services.py```
+```python rest.py```
 
 **(C)** Use the FTP functionality by running the following
 
-```python /scripts/download_the_latest_osg_extract.py```
+```python download_osg_using_ftp.py```
 
 # Documentation
 
